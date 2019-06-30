@@ -3,13 +3,9 @@
 
 (function startProcess() {
   function joinElements(theArray, joinString) {
-    let resultSoFar = "";
-
-    for (let index = 0; index < theArray.length; index += 1) {
-      resultSoFar += theArray[index] + joinString;
-    }
-
-    return resultSoFar;
+    return theArray.reduce((previousValue, currentValue) => {
+      return previousValue + joinString + currentValue;
+    });
   }
 
   console.log(joinElements(["s", "cr", "t cod", " :) :)"], "e"));
