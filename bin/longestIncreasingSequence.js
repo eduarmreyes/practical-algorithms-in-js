@@ -58,6 +58,9 @@
             longestIndex = outerIndex;
           }
         } else {
+          if (temporalCache[outerIndex].length <= 1) {
+            temporalCache[outerIndex] = [];
+          }
           internalIndex = theArray.length;
         }
       }
