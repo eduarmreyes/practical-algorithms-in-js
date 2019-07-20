@@ -37,20 +37,32 @@
     if (theArray.length < 2) {
       return [];
     }
-    let smallestIndexThatStartsTheSequence = 0;
-    const storeOfLongestSequence = [];
-    storeOfLongestSequence.push(theArray[0]);
-    for (let index = 1; index < theArray.length; index += 1) {
-      if (theArray[index - 1] < theArray[index]) {
-        if (theArray[smallestIndexThatStartsTheSequence] < theArray[index]) {
-          if (smallestIndexThatStartsTheSequence === 0) {
-            smallestIndexThatStartsTheSequence = index;
+    const temporalCache = {};
+    let longestIndex = 0;
+    theArray.forEach((element, outerIndex) => {
+      temporalCache[outerIndex] = [theArray[outerIndex]];
+      for (
+        let internalIndex = outerIndex + 1;
+        internalIndex < theArray.length;
+        internalIndex += 1
+      ) {
+        if (
+          theArray[outerIndex] < theArray[internalIndex] &&
+          theArray[internalIndex - 1] < theArray[internalIndex]
+        ) {
+          temporalCache[outerIndex].push(theArray[internalIndex]);
+          if (
+            temporalCache[longestIndex].length <
+            temporalCache[outerIndex].length
+          ) {
+            longestIndex = outerIndex;
           }
-          storeOfLongestSequence.push(theArray[index]);
+        } else {
+          internalIndex = theArray.length;
         }
       }
-    }
-    return storeOfLongestSequence;
+    });
+    return temporalCache[longestIndex];
   }
 
   console.log(longestIncreasingSequence([1]));
@@ -59,10 +71,6 @@
   // should return []
   console.log(longestIncreasingSequence([3, 4, 1, 2]));
   // should return [3, 4]
-  console.log(
-    longestIncreasingSequence([3, 0, 2, 2, 5, -43, -1, 0, 11, 9, 10])
-  );
-  // should return [-43, -1, 0, 11]
   console.log(
     longestIncreasingSequence([3, 0, 2, 2, 5, -43, -1, 0, 11, 9, 10])
   );
