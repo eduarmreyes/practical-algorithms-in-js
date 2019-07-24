@@ -78,4 +78,25 @@
     longestIncreasingSequence([3, 0, 2, 2, 5, -43, -1, 0, 11, 9, 10])
   );
   // should return [-43, -1, 0, 11]
+  console.log(
+    longestIncreasingSequence([
+      8,
+      4,
+      12,
+      10,
+      14,
+      1,
+      5,
+      13,
+      0,
+      2,
+      6,
+      9,
+      11,
+      15,
+      3,
+      7
+    ])
+  );
+  // should return [0, 2, 6, 9, 11, 15]
 })();
